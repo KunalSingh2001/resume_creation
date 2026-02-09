@@ -1,0 +1,134 @@
+/* CreativeTemplate.css */
+.creative-template {
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    background: white;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    min-height: 1000px;
+}
+
+.ct-sidebar {
+    width: 35%;
+    background-color: #2c3e50;
+    color: white;
+    padding: 30px;
+    text-align: left;
+}
+
+.ct-profile-section {
+    margin-bottom: 40px;
+}
+
+.ct-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #f1c40f;
+}
+
+.ct-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #bdc3c7;
+}
+
+.ct-sidebar-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #f1c40f;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    color: #ecf0f1;
+}
+
+.ct-contact-section,
+.ct-skills-section,
+.ct-education-section {
+    margin-bottom: 30px;
+    font-size: 13px;
+    color: #bdc3c7;
+}
+
+.ct-contact-item {
+    margin-bottom: 8px;
+}
+
+.ct-skills-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ct-skills-list li {
+    margin-bottom: 6px;
+}
+
+.ct-edu-item {
+    margin-bottom: 15px;
+}
+
+.ct-degree {
+    font-weight: bold;
+    color: white;
+}
+
+.ct-main-content {
+    flex: 1;
+    padding: 40px;
+    color: #333;
+}
+
+.ct-section {
+    margin-bottom: 35px;
+}
+
+.ct-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: #2c3e50;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.ct-section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    height: 16px;
+    width: 4px;
+    background-color: #f1c40f;
+}
+
+.ct-experience-item {
+    margin-bottom: 25px;
+}
+
+.ct-position {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.ct-company-info {
+    font-size: 14px;
+    color: #7f8c8d;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.ct-summary,
+.ct-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+}

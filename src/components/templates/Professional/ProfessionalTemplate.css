@@ -1,0 +1,128 @@
+/* ProfessionalTemplate.css */
+.professional-template {
+    font-family: 'Times New Roman', Times, serif;
+    background: white;
+    color: #333;
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+}
+
+.pt-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.pt-name {
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.pt-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+
+.pt-contact-info {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    color: #555;
+}
+
+.pt-content {
+    display: flex;
+    gap: 30px;
+}
+
+.pt-main-column {
+    flex: 2;
+}
+
+.pt-sidebar {
+    flex: 1;
+    border-left: 2px solid #ecf0f1;
+    padding-left: 20px;
+}
+
+
+.pt-section {
+    margin-bottom: 25px;
+}
+
+.pt-section-title {
+    font-size: 16px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    letter-spacing: 1px;
+}
+
+.pt-summary {
+    font-size: 14px;
+    text-align: justify;
+}
+
+.pt-experience-item,
+.pt-education-item {
+    margin-bottom: 20px;
+}
+
+.pt-company,
+.pt-school {
+    font-size: 16px;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.pt-exp-header,
+.pt-edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+}
+
+.pt-dates {
+    font-size: 13px;
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+.pt-role,
+.pt-degree {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #2980b9;
+}
+
+.pt-description,
+.pt-location {
+    font-size: 14px;
+}
+
+.pt-skills-list {
+    list-style: none;
+    padding: 0;
+}
+
+.pt-skills-list li {
+    background: #ecf0f1;
+    margin-bottom: 8px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #333;
+    font-family: Arial, sans-serif;
+}

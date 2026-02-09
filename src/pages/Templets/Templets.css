@@ -1,0 +1,194 @@
+/* Templets.css */
+
+.templets-page {
+    padding-top: 2rem;
+    padding-bottom: 6rem;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.templets-header {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    margin-bottom: 4rem;
+    border-radius: 0 0 50% 50% / 4rem;
+}
+
+.templets-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+}
+
+.templets-header p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 400;
+}
+
+.templets-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.templets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 3rem;
+}
+
+.templet-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.templet-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.templet-preview {
+    height: 380px;
+    background-color: #edf2f7;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2rem;
+}
+
+/* More sophisticated skeleton preview */
+.resume-skeleton {
+    width: 80%;
+    height: 100%;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: 4px 4px 0 0;
+}
+
+.sk-header {
+    height: 40px;
+    width: 40%;
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.sk-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.sk-col-left {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.sk-col-right {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.sk-block {
+    height: 8px;
+    width: 100%;
+    background-color: #edf2f7;
+    border-radius: 2px;
+}
+
+.sk-block.title {
+    height: 12px;
+    width: 70%;
+    background-color: #cbd5e0;
+    margin-bottom: 0.2rem;
+}
+
+/* Card Content interactions */
+.templet-card:hover .use-template-overlay {
+    opacity: 1;
+}
+
+.use-template-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(45, 55, 72, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.btn-use-template {
+    background-color: white;
+    color: #2d3748;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.templet-card:hover .btn-use-template {
+    transform: translateY(0);
+}
+
+.templet-info {
+    padding: 1.5rem;
+    background: white;
+    border-top: 1px solid #edf2f7;
+}
+
+.templet-info h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 0.5rem;
+}
+
+.templet-info p {
+    color: #718096;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .templets-header {
+        border-radius: 0;
+        padding: 3rem 1.5rem;
+    }
+
+    .templets-header h1 {
+        font-size: 2.5rem;
+    }
+}

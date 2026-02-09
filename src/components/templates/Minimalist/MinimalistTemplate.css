@@ -1,0 +1,96 @@
+/* MinimalistTemplate.css */
+.minimalist-template {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #000;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.mt-header {
+    margin-bottom: 40px;
+}
+
+.mt-name {
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 5px;
+    letter-spacing: -0.5px;
+}
+
+.mt-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    color: #666;
+}
+
+.mt-contact {
+    font-size: 12px;
+    color: #888;
+}
+
+.mt-section {
+    margin-bottom: 30px;
+}
+
+.mt-heading {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.mt-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #444;
+}
+
+.mt-item {
+    margin-bottom: 20px;
+}
+
+.mt-item-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2px;
+}
+
+.mt-role,
+.mt-degree {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.mt-company,
+.mt-school {
+    font-size: 13px;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.mt-date {
+    font-size: 12px;
+    color: #888;
+}
+
+.mt-skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.mt-skill {
+    font-size: 12px;
+    border: 1px solid #ddd;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
