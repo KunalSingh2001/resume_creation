@@ -1,25 +1,48 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./Templets.css";
 import { dummyData } from "../../utils/dummyData";
 import { templateRegistry } from "../../config/templateRegistry";
+import TEMPLETS_API from "../../api/routes/templatesRoutes";
 
 function Templets() {
     const [templates, setTemplates] = useState([]);
+    const [filteredTemplates, setFilteredTemplates] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     const fetchTemplates = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/api/templates");
-            setTemplates(response.data);
+            const response = await TEMPLETS_API.getAllTemplates();
+            setTemplates(response.data.templates);
+            setFilteredTemplates(response.data.templates);
         } catch (error) {
             console.log(error);
         }
     };
 
+    const fetchCategories = async () => {
+        try {
+            const response = await TEMPLETS_API.getAllCategories();
+            setCategories(response.data.categories);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         fetchTemplates();
+        fetchCategories();
     }, []);
 
+
+    const handleCatChange = (e) => {
+        const selectedCategory = e.target.value;
+        if (selectedCategory === "all") {
+            setFilteredTemplates(templates);
+            return;
+        }
+        const filteredTemplates = templates.filter((template) => (template.category_id == selectedCategory));
+        setFilteredTemplates(filteredTemplates);
+    }
     return (
         <div className="templets-page">
             <header className="templets-header">
@@ -32,10 +55,48 @@ function Templets() {
                 </div>
             </header>
             <div className="templets-container">
+                <div className="filters-container">
+                    <div className="filters-left">
+                        <div className="filter-item">
+                            <label>Category</label>
+                            <select className="filter-select" onChange={handleCatChange}>
+                                <option value="all">All Categories</option>
+
+                                {categories.map((category) => (
+                                    <option key={category.id} value={category.id}>
+                                        {category.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="filter-item">
+                            <label>Sort By</label>
+                            <select className="filter-select">
+                                <option value="recommended">Recommended</option>
+                                <option value="newest">Newest</option>
+                                <option value="popular">Most Popular</option>
+                            </select>
+                        </div>
+
+                        <div className="filter-checkbox">
+                            <input type="checkbox" id="premiumOnly" />
+                            <label htmlFor="premiumOnly">Premium Only</label>
+                        </div>
+                    </div>
+
+                    <div className="filters-right">
+                        <input
+                            type="text"
+                            className="search-input"
+                            placeholder="Search templates..."
+                        />
+                    </div>
+                </div>
+
                 <div className="templets-grid">
-                    {templates.map((template, index) => {
+                    {filteredTemplates.map((template, index) => {
                         const TemplateComponent = templateRegistry[template.slug];
-                        console.log(index, template);
                         return (
                             <div className="templet-card" key={index}>
                                 <div className="templet-preview">

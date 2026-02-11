@@ -4,8 +4,8 @@ import ModernTemplate from "../components/templates/Modern/ModernTemplate";
 import ProfessionalTemplate from "../components/templates/Professional/ProfessionalTemplate";
 
 export const templateRegistry = {
-    creative: CreativeTemplate,
-    minimalist: MinimalistTemplate,
-    modern: ModernTemplate,
-    professional: ProfessionalTemplate,
+    "creative-designer-resume": CreativeTemplate,
+    "simple-student-resume": MinimalistTemplate,
+    "modern-developer-resume": ModernTemplate,
+    "professional-manager-resume": ProfessionalTemplate,
 };

@@ -67,7 +67,8 @@
 
 .templet-preview {
     position: relative;
-    height: 360px; /* 🔑 fixed height */
+    height: 360px;
+    /* 🔑 fixed height */
     background: #edf2f7;
     overflow: hidden;
 }
@@ -75,10 +76,12 @@
 /* ---------- Resume Scale ---------- */
 
 .resume-preview-scale {
-    transform: scale(0.42); /* 🔑 preview scale */
+    transform: scale(0.42);
+    /* 🔑 preview scale */
     transform-origin: top left;
     width: 240%;
-    pointer-events: none; /* disable editing */
+    pointer-events: none;
+    /* disable editing */
 }
 
 /* ---------- Overlay ---------- */
@@ -148,4 +151,76 @@
     .templet-preview {
         height: 320px;
     }
+}
+
+
+.filters-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.filters-left {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-item label {
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: #555;
+    font-weight: 500;
+}
+
+.filter-select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    background: #f9f9f9;
+    transition: 0.3s ease;
+    color: black
+}
+
+.filter-select:focus {
+    border-color: #4f46e5;
+    outline: none;
+    background: #fff;
+}
+
+.filter-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    margin-top: 22px;
+}
+
+.search-input {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    width: 220px;
+    transition: 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #4f46e5;
+    outline: none;
+    background: #fff;
 }
