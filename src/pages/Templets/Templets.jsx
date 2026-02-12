@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./Templets.css";
 import { dummyData } from "../../utils/dummyData";
 import { templateRegistry } from "../../config/templateRegistry";
 import TEMPLETS_API from "../../api/routes/templatesRoutes";
+import { useNavigate } from "react-router-dom";
 
 function Templets() {
+    const navigate = useNavigate();
     const [templates, setTemplates] = useState([]);
-    const [filteredTemplates, setFilteredTemplates] = useState([]);
     const [categories, setCategories] = useState([]);
+
+    const [selectedCategory, setSelectedCategory] = useState("all");
+    const [selectedSort, setSelectedSort] = useState("recommended");
+    const [premiumOnly, setPremiumOnly] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
 
     const fetchTemplates = async () => {
         try {
             const response = await TEMPLETS_API.getAllTemplates();
             setTemplates(response.data.templates);
-            setFilteredTemplates(response.data.templates);
         } catch (error) {
             console.log(error);
         }
@@ -26,23 +31,57 @@ function Templets() {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     useEffect(() => {
         fetchTemplates();
         fetchCategories();
     }, []);
 
+    const filteredTemplates = useMemo(() => {
+        let updatedTemplates = [...templates];
 
-    const handleCatChange = (e) => {
-        const selectedCategory = e.target.value;
-        if (selectedCategory === "all") {
-            setFilteredTemplates(templates);
-            return;
+        if (selectedCategory !== "all") {
+            updatedTemplates = updatedTemplates.filter(
+                (template) => template.category_id == selectedCategory
+            );
         }
-        const filteredTemplates = templates.filter((template) => (template.category_id == selectedCategory));
-        setFilteredTemplates(filteredTemplates);
-    }
+
+        if (premiumOnly) {
+            updatedTemplates = updatedTemplates.filter(
+                (template) => template.is_premium == 1
+            );
+        }
+
+        if (searchTerm) {
+            updatedTemplates = updatedTemplates.filter(
+                (template) =>
+                    template.title
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
+            );
+        }
+
+        if (selectedSort === "recommended") {
+            updatedTemplates.sort((a, b) => b.ats_score - a.ats_score);
+        }
+
+        if (selectedSort === "newest") {
+            updatedTemplates.sort(
+                (a, b) => new Date(b.created_at) - new Date(a.created_at)
+            );
+        }
+
+        if (selectedSort === "popular") {
+            updatedTemplates.sort(
+                (a, b) => b.popularity_count - a.popularity_count
+            );
+        }
+
+        return updatedTemplates;
+
+    }, [templates, selectedCategory, premiumOnly, searchTerm, selectedSort]);
+
     return (
         <div className="templets-page">
             <header className="templets-header">
@@ -54,14 +93,18 @@ function Templets() {
                     </p>
                 </div>
             </header>
+
             <div className="templets-container">
                 <div className="filters-container">
                     <div className="filters-left">
+
                         <div className="filter-item">
                             <label>Category</label>
-                            <select className="filter-select" onChange={handleCatChange}>
+                            <select
+                                className="filter-select"
+                                onChange={(e) => setSelectedCategory(e.target.value)}
+                            >
                                 <option value="all">All Categories</option>
-
                                 {categories.map((category) => (
                                     <option key={category.id} value={category.id}>
                                         {category.name}
@@ -72,7 +115,10 @@ function Templets() {
 
                         <div className="filter-item">
                             <label>Sort By</label>
-                            <select className="filter-select">
+                            <select
+                                className="filter-select"
+                                onChange={(e) => setSelectedSort(e.target.value)}
+                            >
                                 <option value="recommended">Recommended</option>
                                 <option value="newest">Newest</option>
                                 <option value="popular">Most Popular</option>
@@ -80,9 +126,15 @@ function Templets() {
                         </div>
 
                         <div className="filter-checkbox">
-                            <input type="checkbox" id="premiumOnly" />
+                            <input
+                                type="checkbox"
+                                id="premiumOnly"
+                                checked={premiumOnly}
+                                onChange={(e) => setPremiumOnly(e.target.checked)}
+                            />
                             <label htmlFor="premiumOnly">Premium Only</label>
                         </div>
+
                     </div>
 
                     <div className="filters-right">
@@ -90,6 +142,8 @@ function Templets() {
                             type="text"
                             className="search-input"
                             placeholder="Search templates..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
                 </div>
@@ -101,10 +155,15 @@ function Templets() {
                             <div className="templet-card" key={index}>
                                 <div className="templet-preview">
                                     <div className="resume-preview-scale">
-                                        {TemplateComponent && <TemplateComponent data={dummyData} />}
+                                        {TemplateComponent && (
+                                            <TemplateComponent data={dummyData} />
+                                        )}
                                     </div>
                                     <div className="use-template-overlay">
-                                        <button className="btn-use-template">
+                                        <button
+                                            className="btn-use-template"
+                                            onClick={() => navigate(`/editor/${template.slug}`)}
+                                        >
                                             Use Template
                                         </button>
                                     </div>
@@ -114,10 +173,10 @@ function Templets() {
                                     <p>{template.sub_title}</p>
                                 </div>
                             </div>
-                        )
+                        );
                     })}
-
                 </div>
+
             </div>
         </div>
     );
