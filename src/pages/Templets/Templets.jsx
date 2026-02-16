@@ -15,6 +15,8 @@ function Templets() {
     const [premiumOnly, setPremiumOnly] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
 
+    const [templateData, setTemplateData] = useState(dummyData);
+
     const fetchTemplates = async () => {
         try {
             const response = await TEMPLETS_API.getAllTemplates();
@@ -24,6 +26,10 @@ function Templets() {
         }
     };
 
+
+    function handleDataChange(section, fieldName, data) {
+        console.log(section, fieldName, data);
+    }
     const fetchCategories = async () => {
         try {
             const response = await TEMPLETS_API.getAllCategories();
@@ -151,12 +157,13 @@ function Templets() {
                 <div className="templets-grid">
                     {filteredTemplates.map((template, index) => {
                         const TemplateComponent = templateRegistry[template.slug];
+
                         return (
                             <div className="templet-card" key={index}>
                                 <div className="templet-preview">
                                     <div className="resume-preview-scale">
                                         {TemplateComponent && (
-                                            <TemplateComponent data={dummyData} />
+                                            <TemplateComponent data={templateData} />
                                         )}
                                     </div>
                                     <div className="use-template-overlay">

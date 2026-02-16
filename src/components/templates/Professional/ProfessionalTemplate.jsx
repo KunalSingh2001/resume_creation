@@ -1,8 +1,7 @@
 import React from 'react';
 import './ProfessionalTemplate.css';
 
-const ProfessionalTemplate = ({ data }) => {
-    console.log("ProfessionalTemplate page", data);
+const ProfessionalTemplate = ({ data = dummyData }) => {
     const { personalInfo, summary, experience, education, skills } = data;
 
     return (
