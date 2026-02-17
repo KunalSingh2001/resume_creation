@@ -1,8 +1,9 @@
 import React from 'react';
 import './CreativeTemplate.css';
-import { dummyData } from '../../../utils/dummyData';
+import { emptyData } from '../../../utils/dummyData';
 
-const CreativeTemplate = ({ data = dummyData }) => {
+const CreativeTemplate = ({ data = emptyData }) => {
+    console.log("data data data", data);
     const { personalInfo, summary, experience, education, skills } = data;
 
     return (

@@ -1,4 +1,4 @@
-export const dummyData = {
+const dummyData = {
     personalInfo: {
         firstName: "John",
         lastName: "Doe",
@@ -48,3 +48,41 @@ export const dummyData = {
         "Agile Methodologies"
     ]
 };
+
+
+const emptyData = {
+    personalInfo: {
+        firstName: "",
+        lastName: "",
+        jobTitle: "",
+        email: "",
+        phone: "",
+        address: "",
+        linkedin: "",
+        website: ""
+    },
+    summary: "",
+    experience: [
+        {
+            id: "",
+            title: "",
+            company: "",
+            startDate: "",
+            endDate: "",
+            description: ""
+        }
+    ],
+    education: [
+        {
+            id: "",
+            degree: "",
+            school: "",
+            startDate: "",
+            endDate: "",
+            location: ""
+        }
+    ],
+    skills: []
+};
+
+export { dummyData, emptyData };

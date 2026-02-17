@@ -1,14 +1,78 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { templateRegistry } from "../../config/templateRegistry";
-import { dummyData } from "../../utils/dummyData";
+import { emptyData, dummyData } from "../../utils/dummyData";
+import { useReducer } from "react";
 import "./Editor.css";
 
 function Editor() {
+
     const { slug } = useParams();
     const TemplateComponent = templateRegistry[slug];
     const [activeStep, setActiveStep] = useState(1);
-    const [templateData, setTemplateData] = useState(dummyData);
+    const [resumeData, dispatch] = useReducer(resumeReducer, dummyData);
+    function resumeReducer(state, action) {
+        switch (action.type) {
+
+            case "UPDATE_PERSONAL":
+                return {
+                    ...state,
+                    personalInfo: {
+                        ...state.personalInfo,
+                        [action.field]: action.value
+                    }
+                };
+
+            case "UPDATE_SUMMARY":
+                return {
+                    ...state,
+                    summary: action.value
+                };
+
+            case "ADD_EXPERIENCE":
+                return {
+                    ...state,
+                    experience: [
+                        ...state.experience,
+                        {
+                            company: "",
+                            jobTitle: "",
+                            startDate: "",
+                            endDate: "",
+                            description: ""
+                        }
+                    ]
+                };
+
+            case "UPDATE_EXPERIENCE":
+                return {
+                    ...state,
+                    experience: state.experience.map((exp, index) =>
+                        index === action.index
+                            ? { ...exp, [action.field]: action.value }
+                            : exp
+                    )
+                };
+
+            case "ADD_SKILL":
+                return {
+                    ...state,
+                    skills: [...state.skills, ""]
+                };
+
+            case "UPDATE_SKILL":
+                return {
+                    ...state,
+                    skills: state.skills.map((skill, index) =>
+                        index === action.index ? action.value : skill
+                    )
+                };
+
+            default:
+                return state;
+        }
+    }
+
 
     if (!TemplateComponent) {
         return (
@@ -19,7 +83,7 @@ function Editor() {
     }
 
     function handleDataChange(section, fieldName, data) {
-        setTemplateData(prev => ({
+        setresumeData(prev => ({
             ...prev,
             [section]: {
                 ...prev[section],
@@ -29,7 +93,7 @@ function Editor() {
     }
 
     function handleSummaryChange(data) {
-        setTemplateData(prev => ({
+        setresumeData(prev => ({
             ...prev,
             summary: data
         }));
@@ -48,7 +112,7 @@ function Editor() {
 
             <div className="editor-preview-container">
                 <div className="resume-preview-wrapper">
-                    <TemplateComponent data={templateData} />
+                    <TemplateComponent data={resumeData} />
                 </div>
             </div>
 
@@ -74,9 +138,13 @@ function Editor() {
                                     <input
                                         type="text"
                                         placeholder="John"
-                                        value={templateData?.personalInfo?.firstName || ""}
+                                        value={resumeData?.personalInfo?.firstName || ""}
                                         onChange={(e) =>
-                                            handleDataChange("personalInfo", "firstName", e.target.value)
+                                            dispatch({
+                                                type: "UPDATE_PERSONAL",
+                                                field: "firstName",
+                                                value: e.target.value
+                                            })
                                         }
                                     />
                                 </div>
@@ -86,9 +154,13 @@ function Editor() {
                                     <input
                                         type="text"
                                         placeholder="Doe"
-                                        value={templateData?.personalInfo?.lastName || ""}
+                                        value={resumeData?.personalInfo?.lastName || ""}
                                         onChange={(e) =>
-                                            handleDataChange("personalInfo", "lastName", e.target.value)
+                                            dispatch({
+                                                type: "UPDATE_PERSONAL",
+                                                field: "lastName",
+                                                value: e.target.value
+                                            })
                                         }
                                     />
                                 </div>
@@ -98,9 +170,13 @@ function Editor() {
                                     <input
                                         type="text"
                                         placeholder="Software Engineer"
-                                        value={templateData?.personalInfo?.jobTitle || ""}
+                                        value={resumeData?.personalInfo?.jobTitle || ""}
                                         onChange={(e) =>
-                                            handleDataChange("personalInfo", "jobTitle", e.target.value)
+                                            dispatch({
+                                                type: "UPDATE_PERSONAL",
+                                                field: "jobTitle",
+                                                value: e.target.value
+                                            })
                                         }
                                     />
                                 </div>
@@ -110,9 +186,13 @@ function Editor() {
                                     <input
                                         type="email"
                                         placeholder="john@example.com"
-                                        value={templateData?.personalInfo?.email || ""}
+                                        value={resumeData?.personalInfo?.email || ""}
                                         onChange={(e) =>
-                                            handleDataChange("personalInfo", "email", e.target.value)
+                                            dispatch({
+                                                type: "UPDATE_PERSONAL",
+                                                field: "email",
+                                                value: e.target.value
+                                            })
                                         }
                                     />
                                 </div>
@@ -122,9 +202,13 @@ function Editor() {
                                     <input
                                         type="text"
                                         placeholder="+91 9876543210"
-                                        value={templateData?.personalInfo?.phone || ""}
+                                        value={resumeData?.personalInfo?.phone || ""}
                                         onChange={(e) =>
-                                            handleDataChange("personalInfo", "phone", e.target.value)
+                                            dispatch({
+                                                type: "UPDATE_PERSONAL",
+                                                field: "phone",
+                                                value: e.target.value
+                                            })
                                         }
                                     />
                                 </div>
@@ -134,9 +218,13 @@ function Editor() {
                                     <input
                                         type="text"
                                         placeholder="City, Country"
-                                        value={templateData?.personalInfo?.address || ""}
+                                        value={resumeData?.personalInfo?.address || ""}
                                         onChange={(e) =>
-                                            handleDataChange("personalInfo", "address", e.target.value)
+                                            dispatch({
+                                                type: "UPDATE_PERSONAL",
+                                                field: "address",
+                                                value: e.target.value
+                                            })
                                         }
                                     />
                                 </div>
@@ -146,9 +234,13 @@ function Editor() {
                                     <input
                                         type="text"
                                         placeholder="linkedin.com/in/username"
-                                        value={templateData?.personalInfo?.linkedin || ""}
+                                        value={resumeData?.personalInfo?.linkedin || ""}
                                         onChange={(e) =>
-                                            handleDataChange("personalInfo", "linkedin", e.target.value)
+                                            dispatch({
+                                                type: "UPDATE_PERSONAL",
+                                                field: "linkedin",
+                                                value: e.target.value
+                                            })
                                         }
                                     />
                                 </div>
@@ -158,9 +250,13 @@ function Editor() {
                                     <input
                                         type="text"
                                         placeholder="yourportfolio.com"
-                                        value={templateData?.personalInfo?.website || ""}
+                                        value={resumeData?.personalInfo?.website || ""}
                                         onChange={(e) =>
-                                            handleDataChange("personalInfo", "website", e.target.value)
+                                            dispatch({
+                                                type: "UPDATE_PERSONAL",
+                                                field: "website",
+                                                value: e.target.value
+                                            })
                                         }
                                     />
                                 </div>
@@ -191,7 +287,7 @@ function Editor() {
                                 <textarea
                                     placeholder="Example: Experienced software developer with 3+ years of experience building scalable web applications..."
                                     rows="6"
-                                    value={templateData?.summary || ""}
+                                    value={resumeData?.summary || ""}
                                     onChange={(e) => handleSummaryChange(e.target.value)}
                                 ></textarea>
                             </div>

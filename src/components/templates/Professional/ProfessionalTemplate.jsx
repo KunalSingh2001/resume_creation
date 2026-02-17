@@ -3,7 +3,7 @@ import './ProfessionalTemplate.css';
 
 const ProfessionalTemplate = ({ data = dummyData }) => {
     const { personalInfo, summary, experience, education, skills } = data;
-
+    console.log("data data data ProfessionalTemplate", personalInfo);
     return (
         <div className="professional-template">
             <header className="pt-header">
