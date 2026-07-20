@@ -3,9 +3,7 @@ import './CreativeTemplate.css';
 import { emptyData } from '../../../utils/dummyData';
 
 const CreativeTemplate = ({ data = emptyData }) => {
-    console.log("data data data", data);
     const { personalInfo, summary, experience, education, skills } = data;
-
     return (
         <div className="creative-template">
             <aside className="ct-sidebar">
@@ -30,14 +28,36 @@ const CreativeTemplate = ({ data = emptyData }) => {
                         ))}
                     </ul>
                 </div>
-
                 <div className="ct-education-section">
                     <h3 className="ct-sidebar-title">Education</h3>
-                    {education.map(edu => (
-                        <div key={edu.id} className="ct-edu-item">
-                            <div className="ct-degree">{edu.degree}</div>
-                            <div className="ct-school">{edu.school}</div>
-                            <div className="ct-date">{edu.startDate} - {edu.endDate}</div>
+
+                    {education.map((edu, index) => (
+                        <div key={index} className="ct-edu-item">
+
+                            <div className="ct-edu-header">
+                                <h4 className="ct-degree">
+                                    {edu.degree}
+                                </h4>
+
+                                <span className="ct-date">
+                                    {edu.startYear} - {edu.endYear}
+                                </span>
+                            </div>
+
+                            <div className="ct-field">
+                                {edu.field}
+                            </div>
+
+                            <div className="ct-school">
+                                {edu.institute}
+                            </div>
+
+                            {edu.score && (
+                                <div className="ct-score">
+                                    Score: {edu.score}%
+                                </div>
+                            )}
+
                         </div>
                     ))}
                 </div>

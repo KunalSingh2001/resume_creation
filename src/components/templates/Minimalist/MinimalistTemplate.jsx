@@ -46,11 +46,18 @@ const MinimalistTemplate = ({ data = dummyData }) => {
 
                 <section className="mt-section">
                     <h3 className="mt-heading">Education</h3>
-                    {education.map(edu => (
-                        <div key={edu.id} className="mt-item">
-                            <div className="mt-degree">{edu.degree}</div>
-                            <div className="mt-school">{edu.school}, {edu.location}</div>
-                            <div className="mt-date">{edu.startDate} - {edu.endDate}</div>
+                    {education.map((edu, index) => (
+                        <div key={index} className="mt-item">
+                            <div className="mt-item-header">
+                                <span className="mt-role">
+                                    {edu.degree} ({edu.field})
+                                </span>
+                                <span className="mt-date">
+                                    {edu.startYear} - {edu.endYear}
+                                </span>
+                            </div>
+                            <div className="mt-company">{edu.institute}</div>
+                            <p className="mt-text">Score: {edu.score}%</p>
                         </div>
                     ))}
                 </section>

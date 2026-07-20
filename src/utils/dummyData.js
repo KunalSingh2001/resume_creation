@@ -62,26 +62,8 @@ const emptyData = {
         website: ""
     },
     summary: "",
-    experience: [
-        {
-            id: "",
-            title: "",
-            company: "",
-            startDate: "",
-            endDate: "",
-            description: ""
-        }
-    ],
-    education: [
-        {
-            id: "",
-            degree: "",
-            school: "",
-            startDate: "",
-            endDate: "",
-            location: ""
-        }
-    ],
+    experience: [],
+    education: [],
     skills: []
 };
 

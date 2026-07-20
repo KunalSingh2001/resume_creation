@@ -12,7 +12,7 @@ function Navbar() {
                     <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         Home
                     </NavLink>
-                    <NavLink to="/templets" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                    <NavLink to="/templates" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         Templates
                     </NavLink>
                     {/* Add more links as needed */}
