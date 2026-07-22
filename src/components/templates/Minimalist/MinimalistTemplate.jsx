@@ -4,7 +4,7 @@ import { dummyData } from '../../../utils/dummyData';
 
 const MinimalistTemplate = ({ data = dummyData }) => {
     const { personalInfo, summary, experience, education, skills } = data;
-
+    console.log("bshbshbd sds dsd sdsd", skills);
     return (
         <div className="minimalist-template">
             <header className="mt-header">
@@ -24,7 +24,7 @@ const MinimalistTemplate = ({ data = dummyData }) => {
                 <section className="mt-section">
                     <h3 className="mt-heading">Experience</h3>
                     {experience.map(exp => (
-                        <div key={exp.id} className="mt-item">
+                        <div key={exp._id} className="mt-item">
                             <div className="mt-item-header">
                                 <span className="mt-role">{exp.title}</span>
                                 <span className="mt-date">{exp.startDate} - {exp.endDate}</span>
@@ -39,7 +39,7 @@ const MinimalistTemplate = ({ data = dummyData }) => {
                     <h3 className="mt-heading">Skills</h3>
                     <div className="mt-skills-grid">
                         {skills.map((skill, index) => (
-                            <span key={index} className="mt-skill">{skill}</span>
+                            <span key={index} className="mt-skill">{skill.skill}</span>
                         ))}
                     </div>
                 </section>
@@ -62,7 +62,7 @@ const MinimalistTemplate = ({ data = dummyData }) => {
                     ))}
                 </section>
             </div>
-        </div>
+        </div >
     );
 };
 

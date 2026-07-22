@@ -281,25 +281,21 @@ function Editor() {
             }
         }
 
-        console.log("Download Resume");
+        const resumeElement = document.querySelector(".resume-preview-wrapper");
 
-        // const resumeElement = document.querySelector(".resume-preview-wrapper");
+        const canvas = await html2canvas(resumeElement, {
+            scale: 2,
+            useCORS: true,
+        });
 
-        // const canvas = await html2canvas(resumeElement, {
-        //     scale: 2,
-        //     useCORS: true,
-        // });
+        const imgData = canvas.toDataURL("image/png");
 
-        // const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("p", "mm", "a4");
 
-        // const pdf = new jsPDF("p", "mm", "a4");
-
-        // const pdfWidth = pdf.internal.pageSize.getWidth();
-        // const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-        // pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-
-        // pdf.save("resume.pdf");
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        pdf.save("resume.pdf");
     };
 
     return (

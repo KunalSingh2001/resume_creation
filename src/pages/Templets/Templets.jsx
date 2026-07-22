@@ -47,8 +47,6 @@ function Templets() {
     const filteredTemplates = useMemo(() => {
         let updatedTemplates = [...templates];
         if (selectedCategory !== "all") {
-            console.log("entered",selectedCategory);
-            console.log("updatedTemplates",updatedTemplates);
             updatedTemplates = updatedTemplates.filter(
                 (template) => template.category_id.slug == selectedCategory
             );
@@ -113,7 +111,7 @@ function Templets() {
                             >
                                 <option value="all">All Categories</option>
                                 {categories.map((category) => (
-                                    <option key={category.id} value={category.slug}>
+                                    <option key={category._id} value={category.slug}>
                                         {category.name}
                                     </option>
                                 ))}
@@ -154,11 +152,9 @@ function Templets() {
                         />
                     </div>
                 </div>
-
                 <div className="templets-grid">
                     {filteredTemplates.map((template, index) => {
                         const TemplateComponent = templateRegistry[template.slug];
-
                         return (
                             <div className="templet-card" key={index}>
                                 <div className="templet-preview">
@@ -184,7 +180,6 @@ function Templets() {
                         );
                     })}
                 </div>
-
             </div>
         </div>
     );
