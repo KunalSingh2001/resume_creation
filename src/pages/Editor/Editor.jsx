@@ -10,8 +10,11 @@ import axios from "axios";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useGoogleAuth } from "../../hooks/useGoogleAuth";
+import { useAuth } from "../../context/AuthContext";
 function Editor() {
+    const {checkUser} = useAuth();
     const { slug } = useParams();
+    console.log("slug", slug);
     const TemplateComponent = templateRegistry[slug];
     const [activeStep, setActiveStep] = useState(1);
     const [resumeData, dispatch] = useReducer(resumeReduser, emptyData);
@@ -267,7 +270,7 @@ function Editor() {
     };
 
     const login = useGoogleAuth(() => {
-        console.log("Google Login Success");
+        checkUser();
     });
 
     const handleDownload = async () => {
@@ -280,9 +283,8 @@ function Editor() {
                 console.log(error);
             }
         }
-
+        
         const resumeElement = document.querySelector(".resume-preview-wrapper");
-
         const canvas = await html2canvas(resumeElement, {
             scale: 2,
             useCORS: true,
@@ -296,11 +298,14 @@ function Editor() {
         const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
         pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
         pdf.save("resume.pdf");
+
+        await TEMPLETS_API.storeActivity({
+            slug: slug
+        });
     };
 
     return (
         <div className="editor-page">
-
             <div className="editor-preview-container">
                 <div className="resume-preview-wrapper">
                     <TemplateComponent data={resumeData} />

@@ -3,7 +3,6 @@ import axios from "axios";
 import Auth_API from "../api/routes/authRoutes";
 
 export const useGoogleAuth = (onLoginSuccess) => {
-
     const login = useGoogleLogin({
         flow: "implicit",
         onSuccess: async (credentialResponse) => {

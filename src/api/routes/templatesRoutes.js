@@ -6,6 +6,7 @@ const TEMPLETS_API = {
     saveResume: (data) => api.post("/resume/save", data),
     getResume: () => api.get("/resume/get"),
     downloadResume: () => api.get("/resume/download"),
+    storeActivity: (slug) => api.post("/resume/store-activity", slug),
 }
 
 export default TEMPLETS_API
